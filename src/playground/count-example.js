@@ -10,6 +10,18 @@ class Counter extends React.Component {
             name: 'Julie'
         }
     }
+    componentDidMount() {
+        const stringCount = localStorage.getItem('count')
+        const count = parseInt(stringCount, 10)
+        if (!isNaN(count)) { //return true if not a number
+            this.setState(() => ({ count: count }))
+        }
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.count !== this.state.count) {
+            localStorage.setItem('count', this.state.count)
+        }
+    }
     //setState is async
     handleIncrement() {
         this.setState((prevState) => {
@@ -17,7 +29,6 @@ class Counter extends React.Component {
                 count: prevState.count + 1
             }
         })
-
     }
     handleMinus() {
         this.setState((prevState) => {
@@ -45,7 +56,7 @@ class Counter extends React.Component {
     }
 }
 
-ReactDOM.render(<Counter />, document.getElementById('app'))
+ReactDOM.render(<Counter count={10} />, document.getElementById('app'))
 
 // let count = 0
 // const addone = () => {
