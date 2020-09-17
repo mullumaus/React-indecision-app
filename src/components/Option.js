@@ -3,9 +3,10 @@ import React from 'react'
 
 //stateless function
 const Option = (props) => (
-    <div>
-        Option: {props.optionText}
+    <div className="option">
+        <p className="option__text">{props.count}. {props.optionText}</p>
         <button
+            className="button button--link"
             onClick={(e) => {
                 props.handleDeleteOption(props.optionText)
             }}>
